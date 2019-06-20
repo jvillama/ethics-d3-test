@@ -1,717 +1,431 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-    path {
-      fill: #ccc;
-      stroke: grey;
-      stroke-linejoin: round;
-    }
-    .tooltip {
-      position: absolute;
-      width: auto;
-      height: auto;
-      padding: 4px;
-      padding-top: 8px;
-      font: 12px sans-serif;
-      color: white;
-      /* text-align: center; */
-      background: #fe8300;
-      border: 0;
-      border-radius: 10px;
-      opacity: 0;
-    }
-</style>
-<div class="control-group">
-  <select class="bk bk-input" id="selCand" onchange="candOptionChanged(this.value)" autocomplete="off">
-    <option class="bk" selected="true" value="All">All</option>
-    <option class="bk" value="Aldana, Manuel">Aldana, Manuel</option><option class="bk" value="Alva, Lisa">Alva, Lisa</option><option class="bk" value="Amori, Paul">Amori, Paul</option><option class="bk" value="Arnold, Caney">Arnold, Caney</option><option class="bk" value="Ayala, Olga">Ayala, Olga</option><option class="bk" value="BARR, STEVE">BARR, STEVE</option><option class="bk" value="Barton, Luca ">Barton, Luca </option><option class="bk" value="Bernal, Benny ">Bernal, Benny </option><option class="bk" value="Blumenfield, Bob">Blumenfield, Bob</option><option class="bk" value="Bonin, Mike">Bonin, Mike</option><option class="bk" value="Bray-Ali, Josef A.">Bray-Ali, Josef A.</option><option class="bk" value="Buscaino, Joe">Buscaino, Joe</option><option class="bk" value="CHASE, NICOLE">CHASE, NICOLE</option><option class="bk" value="Cabrera, Adriana">Cabrera, Adriana</option><option class="bk" value="Cedillo, Gil">Cedillo, Gil</option><option class="bk" value="Creed, Jesse M.">Creed, Jesse M.</option><option class="bk" value="De la Torre, David">De la Torre, David</option><option class="bk" value="Feuer, Mike">Feuer, Mike</option><option class="bk" value="Flores, Fred ">Flores, Fred </option><option class="bk" value="GALPERIN, RON">GALPERIN, RON</option><option class="bk" value="Garcetti, Eric">Garcetti, Eric</option><option class="bk" value="Garcia, Monica">Garcia, Monica</option><option class="bk" value="Giaba, Matthew">Giaba, Matthew</option><option class="bk" value="Gibson, Robert">Gibson, Robert</option><option class="bk" value="Gomes, Terrence">Gomes, Terrence</option><option class="bk" value="Gonez, Kelly">Gonez, Kelly</option><option class="bk" value="Gould, Noel">Gould, Noel</option><option class="bk" value="Hernandez, David">Hernandez, David</option><option class="bk" value="Hernandez, Giovany">Hernandez, Giovany</option><option class="bk" value="Higginson , John ">Higginson , John </option><option class="bk" value="Holdorff Polhill, Allison">Holdorff Polhill, Allison</option><option class="bk" value="Koretz, Paul">Koretz, Paul</option><option class="bk" value="Kremer, Yuval">Kremer, Yuval</option><option class="bk" value="Markland, Montgomery ">Markland, Montgomery </option><option class="bk" value="Martayan, Gregory ">Martayan, Gregory </option><option class="bk" value="Martinez, Venessa">Martinez, Venessa</option><option class="bk" value="Melvoin, Nicholas">Melvoin, Nicholas</option><option class="bk" value="Miner, Arthur">Miner, Arthur</option><option class="bk" value="Nuno , Jorge ">Nuno , Jorge </option><option class="bk" value="O'Farrell, Mitch">O'Farrell, Mitch</option><option class="bk" value="PARSEGHIAN, ARAZ">PARSEGHIAN, ARAZ</option><option class="bk" value="Padilla, Imelda">Padilla, Imelda</option><option class="bk" value="Petersen, Carl">Petersen, Carl</option><option class="bk" value="Preven, Eric">Preven, Eric</option><option class="bk" value="Price, Curren">Price, Curren</option><option class="bk" value="RATLIFF, MONICA">RATLIFF, MONICA</option><option class="bk" value="RYAVEC, MARK">RYAVEC, MARK</option><option class="bk" value="Rodriguez, Monica">Rodriguez, Monica</option><option class="bk" value="Rudisill, Robin ">Rudisill, Robin </option><option class="bk" value="Salans, Jessica">Salans, Jessica</option><option class="bk" value="Saunders, Constance">Saunders, Constance</option><option class="bk" value="Schwartz, Mitchell">Schwartz, Mitchell</option><option class="bk" value="Shain, Sylvie">Shain, Sylvie</option><option class="bk" value="Sharp, Jeffery">Sharp, Jeffery</option><option class="bk" value="Torossian, Karo">Torossian, Karo</option><option class="bk" value="Woodruff, Nancy">Woodruff, Nancy</option><option class="bk" value="ZIMMER, STEVE">ZIMMER, STEVE</option><option class="bk" value="Zide, Bill">Zide, Bill</option>
-  </select>
-  <select class="bk bk-input" id="selPeriod" onchange="fileOptionChanged(this.value)" autocomplete="off">
-    <option class="bk" selected="true" value="All">All</option>
-    <option class="bk" value="1st Semi-Annual (2015-01-01 to 2015-06-30)">1st Semi-Annual (2015-01-01 to 2015-06-30)</option>
-    <option class="bk" value="2nd Semi-Annual (2015-07-01 to 2015-12-31)">2nd Semi-Annual (2015-07-01 to 2015-12-31)</option>
-    <option class="bk" value="1st Semi-Annual (2016-01-01 to 2016-06-30)">1st Semi-Annual (2016-01-01 to 2016-06-30)</option>
-    <option class="bk" value="3rd Quarterly (2016-07-01 to 2016-09-30)">3rd Quarterly (2016-07-01 to 2016-09-30)</option>
-    <option class="bk" value="4th Quarterly (2016-10-01 to 2016-12-31)">4th Quarterly (2016-10-01 to 2016-12-31)</option>
-    <option class="bk" value="1st Pre-Election (2017-01-01 to 2017-01-21)">1st Pre-Election (2017-01-01 to 2017-01-21)</option>
-    <option class="bk" value="2nd Pre-Election (2017-01-22 to 2017-02-18)">2nd Pre-Election (2017-01-22 to 2017-02-18)</option>
-    <option class="bk" value="3rd Pre-Election (2017-02-19 to 2017-03-01)">3rd Pre-Election (2017-02-19 to 2017-03-01)</option>
-    <option class="bk" value="1st Semi-Annual (2017-01-01 to 2017-06-30)">1st Semi-Annual (2017-01-01 to 2017-06-30)</option>
-    <option class="bk" value="2nd Semi-Annual (2017-07-01 to 2017-12-31)">2nd Semi-Annual (2017-07-01 to 2017-12-31)</option>
-    <option class="bk" value="1st Pre-Runoff (2017-03-02 to 2017-04-01)">1st Pre-Runoff (2017-03-02 to 2017-04-01)</option>
-    <option class="bk" value="2nd Pre-Runoff (2017-04-02 to 2017-04-29)">2nd Pre-Runoff (2017-04-02 to 2017-04-29)</option>
-    <option class="bk" value="3rd Pre-Runoff (2017-04-30 to 2017-05-10)">3rd Pre-Runoff (2017-04-30 to 2017-05-10)</option>
-    <option class="bk" value="1st Semi-Annual (2018-01-01 to 2018-06-30)">1st Semi-Annual (2018-01-01 to 2018-06-30)</option>
-    <option class="bk" value="2nd Semi-Annual (2018-07-01 to 2018-12-31)">2nd Semi-Annual (2018-07-01 to 2018-12-31)</option>
-  </select>
-  <select class="bk bk-input" id="selOffice" onchange="officeOptionChanged(this.value)" autocomplete="off">
-    <option class="bk" selected="true" value="All">All</option>
-    <option class="bk" value="LAUSD Board Member">LAUSD Board Member</option>
-    <option class="bk" value="City Attorney">City Attorney</option>
-    <option class="bk" value="City Council Member">City Council Member</option>
-    <option class="bk" value="City Controller">City Controller</option>
-    <option class="bk" value="Mayor">Mayor</option>
-  </select>
-</div>
-
-<svg width="960" height="960"></svg>
-<script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
-<script src="https://d3js.org/topojson.v2.min.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
-
-<script>
-  /*
-  Garcetti            1329
-  Cedillo             1057
-  Rodriguez           1037
-  Melvoin              798
-  ZIMMER               646
-  Price                626
-  Torossian            588
-  O'Farrell            457
-  Koretz               429
-  Creed                426
-  Schwartz             395
-  Gonez                384
-  Buscaino             369
-  Feuer                351
-  */
-
-var mapsvg = d3.select("svg")
-    .on("click", stopped, true);
-var width = 960;
-var height = 960;
-// var scale0 = 500;
-var geoData;
-var contribData;
-var contribDataClone;
-
-var lowColor = '#f9f9f9';
-// var highColor = '#bc2a66';
-var highColor = '#bc2a66';
-// var maxVal = 20000;
-var maxVal = 500000;
-// var domain = [1,maxVal];
-var domain = [0, 10, 100, 1000, 10000, 500000];
-// var ramp = d3.scaleLinear()
-  // .domain(domain)
-  // .range([lowColor,highColor]);
-// var ramp = d3.scaleLinear()
-var ramp = d3.scaleThreshold()
-  // .domain([0,maxVal])
-  // .domain([0.1,100,1000,10000,100000])
-  .domain([ 1000, 2500, 5000, 10000, 50000, 100000, 500000 ])
-  // .range(d3.range(8).map(function(i) { return "q" + i + "-9"}));
-  // .range([lowColor,highColor]);
-  .range(d3.schemeBlues[8]);
-  // .interpolator(d3.scaleOrdinal(d3.schemeBlues[9]));
-
-var steps = 8
-//Discrete diverging scale
-var color_threshold = d3.scaleThreshold()
-  .domain(d3.range(-1 + 2/steps, 1, 2/steps) ) //[-.6, -.2, .2, .6]
-  .range(d3.schemePuOr[steps]); //=> 5 colors in an array
-
-// console.log([d3.scaleOrdinal(d3.schemeBlues[9])]);
-// console.log(d3.schemeBlues[9]);
-// console.log(d3.schemePuOr[9]);
-
-function getToolTip(mod=false) {
-  var toolTip = d3.tip()
-    .attr("class", "tooltip")
-    .offset([80, -60]);
-  
-  if (mod) {
-    return toolTip.html(function(d) {
-      // if(d.properties.hasOwnProperty('sum2')) {
-        return (`Zip Code: ${d.properties.zipcode}<br>Sum: ${d3.format("($,")(d.properties.sum2.toFixed(0))}<br>Count: ${d.properties.count2}<br>Mean: ${d3.format("($,")(d.properties.mean2.toFixed(0))}`);
-      // }
-    });
-  }
-  return toolTip.html(function(d) {
-    return (`Zip Code: ${d.properties.zipcode}<br>Sum: ${d3.format("($,")(d.properties.sum.toFixed(0))}<br>Count: ${d.properties.count}<br>Mean: ${d3.format("($,")(d.properties.mean.toFixed(0))}`);
-  });
-}
-
-var zoom = d3.zoom()
-  // .translate([width / 2, height / 2])
-  // .scale(scale0)
-  // .scaleExtent([scale0, 10 * scale0])
-  .scaleExtent([1,8])
-  .on("zoom", zoomed);
-  
-function zoomed() {
-  var currentTransform = d3.event.transform;
-  mapsvg.style("stroke-width", 1.5 / currentTransform.k + "px");
-  mapsvg.attr("transform", currentTransform);
-
-  // chosenProjection
-  //   .translate(zoom.translate())
-  //   .scale(zoom.scale());
-
-  // mapsvg.selectAll("path")
-  //   .attr("d", path);
-  // mapsvg.selectAll("circle.city")
-  //   .attr({
-  //     cx: getX,
-  //     cy: getY
-  //   })
-}
-
-function stopped() {
-  if (d3.event.defaultPrevented) d3.event.stopPropagation();
-}
-
-function drawMap(w,h) {
-
-}
-
-let filterOptions = {
-  cand: "All",
-  period: "All",
-  office: "All"
-};
-
-function changeData() {
-  if(filterOptions.cand === "All" && filterOptions.period === "All" && filterOptions.office === "All") {
-    render(contribData);
-  } else {
-    contribDataClone = JSON.parse(JSON.stringify(contribData));
-
-    if(filterOptions.cand != "All") {
-      contribDataClone = contribDataClone.filter(row => row.OC_NM_LST === filterOptions.cand);
-    }
-    if(filterOptions.period != "All") {
-      contribDataClone = contribDataClone.filter(row => row.filing_period === filterOptions.period)
-    }
-    if(filterOptions.office != "All") {
-      contribDataClone = contribDataClone.filter(row => row.OFC_DESC === filterOptions.office)
-    }
-    render(contribDataClone);
-  }
-}
-
-function candOptionChanged(cand) {
-  let last = cand.split(',')[0];
-
-  if(filterOptions.cand != last) {
-    filterOptions.cand = last;
-    changeData();
-  }
-}
-
-function fileOptionChanged(period) {
-  if(filterOptions.period != period) {
-    filterOptions.period = period;
-    changeData();
-  }
-}
-
-function officeOptionChanged(office) {
-  if(filterOptions.office != office) {
-    filterOptions.office = office;
-    changeData();
-  }
-}
-
-function render(data) {
-  // Deep clone geojson data
-  let geoclone = JSON.parse(JSON.stringify(geoData));
-
-  /*
-    0: "election_desc"
-    1: "OFC_DESC"
-    2: "OC_DIST_NUM"
-    3: "OC_NM_LST"
-    4: "OC_NM_FRST"
-    5: "filing_period"
-    6: "RPT_ZIP_CD"​​
-    7: "TOT_CON_AMT"
-  */
-
-  var result = [];
-  data.reduce(function(res, value) {
-    if (!res[value.RPT_ZIP_CD]) {
-      res[value.RPT_ZIP_CD] = {
-        RPT_ZIP_CD: value.RPT_ZIP_CD,
-        sum: 0,
-        count: 0,
-        mean: 0
-      };
-      result.push(res[value.RPT_ZIP_CD])
-    }
-    res[value.RPT_ZIP_CD].sum += Number(value.TOT_CON_AMT);
-    res[value.RPT_ZIP_CD].count += 1;
-    res[value.RPT_ZIP_CD].mean = res[value.RPT_ZIP_CD].sum/res[value.RPT_ZIP_CD].count;
-    return res;
-  }, {});
-  // Optional sort
-  // result.sort(function(a, b) {
-  //   var zipA = a.RPT_ZIP_CD.toUpperCase(); // ignore upper and lowercase
-  //   var zipB = b.RPT_ZIP_CD.toUpperCase(); // ignore upper and lowercase
-  //   if (zipA < zipB) {
-  //     return -1;
-  //   }
-  //   if (zipA > zipB) {
-  //     return 1;
-  //   }
-
-  //   // names must be equal
-  //   return 0;
-  // });
-
-  // console.log(result);
-
-  // Loop through each data value in the .csv file
-  for (var i = 0; i < result.length; i++) {
-
-    // Grab Zip Code
-    var dataZip = result[i].RPT_ZIP_CD;
-
-    // Grab total sum value 
-    var dataValue = result[i];
-
-    // Find the corresponding state inside the GeoJSON
-    for (var j = 0; j < geoclone.features.length; j++)  {
-      var jsonZip = geoclone.features[j].properties.zipcode;
-
-      if (dataZip == jsonZip) {
-
-        // Copy the data value into the JSON
-        geoclone.features[j].properties.sum2 = dataValue.sum;
-        geoclone.features[j].properties.count2 = dataValue.count;
-        geoclone.features[j].properties.mean2 = dataValue.mean;
-
-        // Stop looking through the JSON
-        break;
-      }
-    }
-  }
-
-  // var chosenProjection = d3.geoAlbersUsa()//.geoMercator()
-    // .geoIdentity()
-    // .scale(1)
-    // .translate([1300, 450])
-    // .translate([width / 2, height / 2])
-    // .translate([34.0000, -118.300])
-    // .fitSize([width, height], data);
-
-  // var path = d3.geoPath()
-  //   .projection(chosenProjection);
-
-  // console.log(data.features, amount);
-  // mapsvg.selectAll('path').remove();
-
-  let toolTip = getToolTip(true);
-
-  // console.log(geoclone);
-  mapsvg.selectAll("path")
-    // .data(data.features.filter(function(d){return d.properties.sum <= amount;}))
-    .data(geoclone.features)
-    // .enter()
-    // .append("path")
-    // .attr("d", path)
-    .style("fill", function(d) { 
-      if(d.properties.hasOwnProperty('sum2')) {
-        // console.log(d.properties);
-        return ramp(d.properties.sum2);
-      }
-      return '#ccc';
-    })
-    .call(toolTip)
-    .on("mouseover", function(d) {
-      if(d.properties.hasOwnProperty('sum2') && d.properties.sum2) {
-        // toolTip.transition()
-        //   .duration(200)
-        //   .style("opacity", .9);
-        toolTip.show(d);
-      }
-    })
-    // onmouseout event
-    .on("mouseout", function(d, index) {
-      // toolTip.transition()
-      //   .duration(500)
-      //   .style("opacity", 0);
-      toolTip.hide(d);
-    });
-
-
-// var labels = ['0', '1-5', '6-10', '11-25', '26-100', '101-1000', '> 1000'];
-// var legend = d3.legendColor()
-//     .labels(function (d) { return labels[d.i]; })
-//     .shapePadding(4)
-//     .scale(colorScale);
-  
-
-    // .append("path")
-    // .attr("class", "h-bar")
-    //  .append("span");
-
-  //  d3.select("body").selectAll("div.h-bar") // <-D
-  //          .data(data.filter(function(d){return d.category == category;}))
-  //      .attr("class", "h-bar")
-  //      .style("width", function (d) {
-  //          return (d.expense * 5) + "px";}
-  //      )
-  //      .select("span")
-  //          .text(function (d) {
-  //              return d.category;
-  //          });
-             
-  //  d3.select("body").selectAll("div.h-bar") // <-C
-  //      .data(data.filter(function(d){return d.category == category;}))
-  //      .exit().remove();
-/* d3.select("body").selectAll("div.h-bar")
-           .filter(function (d, i) { // <-E
-               return d.category == category;
-           })
-           .classed("selected", true);
-  console.log(data);*/
-
-  // => {3: ["one", "two"], 5: ["three"]}
-  // svg.selectAll("circle")
-  // 	.data(data)
-  // 	.enter()
-  // 	.append("circle")
-  // 	.attr("cx", function(d) {
-  // 		return projection([d.lon, d.lat])[0];
-  // 	})
-  // 	.attr("cy", function(d) {
-  // 		return projection([d.lon, d.lat])[1];
-  // 	})
-  // 	.attr("r", function(d) {
-  // 		return Math.sqrt(d.years) * 4;
-  // 	})
-  // 		.style("fill", "rgb(217,91,67)")	
-  // 		.style("opacity", 0.85)	
-
-  // 	// Modification of custom tooltip code provided by Malcolm Maclean, "D3 Tips and Tricks" 
-  // 	// http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html
-  // 	.on("mouseover", function(d) {      
-  //     	div.transition()        
-  //       	   .duration(200)      
-  //            .style("opacity", .9);      
-  //            div.text(d.place)
-  //            .style("left", (d3.event.pageX) + "px")     
-  //            .style("top", (d3.event.pageY - 28) + "px");    
-  // 	})
-
-  //   // fade out tooltip on mouse out               
-  //   .on("mouseout", function(d) {       
-  //       div.transition()        
-  //           .duration(500)      
-  //           .style("opacity", 0);   
-  //   });
-}
-
-var geojson_file = "https://gist.githubusercontent.com/jvillama/4e1d57a5354e6aaad5ab8d6eaf925341/raw/7753369b7a61a8b97561428891d4ea8b71c59150/Data%2520Angels%25202017%2520Contributions%2520by%2520Zip.geojson";
-
-// d3.json("Data Angels 2017 Contributions by Zip.geojson", function(error, data) {
-d3.json("Data Angels 2017 Contributions by Zip.topojson", function(error, data) {
-  if (error) throw error;
-
-  // geoData = data;
-  geoData = topojson.feature(data, data.objects["Data Angels 2017 Contributions by Zip"]);
-  var chosenProjection = d3.geoAlbersUsa()//.geoMercator()
-    // .geoIdentity()
-    .scale(1)
-    // .translate([1300, 450])
-    // .translate([width / 2, height / 2])
-    // .translate([34.0000, -118.300])
-    .fitSize([width, height], geoData);
-
-  var path = d3.geoPath()
-    .projection(chosenProjection);
-  
-  // mapsvg
-    // .data(geoData.features)
-    // .enter()
-    // .append("path")
-    // .attr("d", path(geoData))
-    // .attr("viewBox", "50 10 " + width + " " + height)
-    // .attr("preserveAspectRatio", "xMinYMin")
-    // .style("cursor", "move")
-    // .style("stroke", "#fff")
-    // .style("stroke-width", "1")
-    // .data(geoData.features)
-    // .enter()
-    // .style("fill", function(d) { 
-    //   // console.log(d);
-    //   return ramp(d.properties.sum)
-    // });
-  
-  let toolTip = getToolTip();
-
-  // Legend
-  var g = mapsvg.append("g")
-    .attr("class", "legendThreshold")
-    .attr("transform", "translate(20,20)");
-  g.append("text")
-      .attr("class", "caption")
-      .attr("x", 0)
-      .attr("y", -6)
-      .text("Contribution Amount ($)");
-  var legend = d3.legendColor()
-    .labelFormat(d3.format(","))
-    .labels(d3.legendHelpers.thresholdLabels)
-    // .labels(function (d) { return labels[d.i]; })
-    .shapePadding(4)
-    // .useClass(true)
-    // .cells(8)
-    // .cells([ 0, 1000, 2500, 5000, 10000, 50000, 100000, 500000 ])
-    .scale(ramp);
-
-  // console.log(geoData.features);
-  // console.log(path);
-  mapsvg.selectAll("path")
-      .data(geoData.features)
-      .enter()
-      .append("path")
-    	.attr("d", path)
-      .style("fill", function(d) { 
-        if(d.properties.hasOwnProperty('sum') && d.properties.sum != 0) {
-          // console.log(d.properties);
-          return ramp(d.properties.sum);
-        }
-        return '#ccc';
-      })
-      .call(toolTip)
-      .on("mouseover", function(d) {
-        if(d.properties.hasOwnProperty('sum') && d.properties.sum) {
-          // console.log(toolTip);
-          // console.log(d3.select("#tooltip"));
-          // toolTip.transition()
-          //   .duration(200)
-          //   .style("opacity", .9);
-          toolTip.show(d);
-        }
-      })
-      // onmouseout event
-      .on("mouseout", function(d, index) {
-        // toolTip.transition()
-        //   .duration(500)
-        //   .style("opacity", 0);
-        toolTip.hide(d);
-      });
-  
-  mapsvg.select(".legendThreshold")
-    .call(legend);
-
-  // var locations = geoData.features;
-  // var hue = 0; //create the circles
-  
-  // we will pass our data (the TopoJSON) as an argument, then create SVG elements using a classic D3 append. Selecting all paths, the TopoJSON is bound in the data method. From here, we can perform work on each element.
-  
-  
-  // locations.map(function(d) {  // Create an object for holding dataset
-  //   hue += 0.36                // Create property for each circle, give it value from color
-  //   d.color = 'hsl(' + hue + ', 100%, 50%)';
-  // });
-  
-  // Classic D3... Select non-existent elements, bind the data, append the elements, and apply attributes
-  // mapsvg.selectAll('circle')
-  //   .data(locations)
-  //   .enter()
-  //   .append('circle') //show the circles
-  //   .attr('cx', function(d) {
-  //     if (d.geometry) {
-  //       return chosenProjection([d.geometry.coordinates[0], d.geometry.coordinates[1]])[0];
-  //     }
-  //   })
-  //   .attr('cy', function(d) {
-  //     if (d.geometry) {
-  //       return chosenProjection([d.geometry.coordinates[0], d.geometry.coordinates[1]])[1];
-  //     }
-  //   })
-  //   .attr('r', function(d) {
-  //     if (d.properties.sum) {
-  //       return Math.pow(parseInt(d.properties.sum), 1 / 9);
-  //     }
-  //   })
-  //   .style('fill', function(d) {
-  //   //Use the Color Function to set the Fill Value for each circle
-  //     return d.color;
-  //   })
-
-  // mapsvg.call(zoom);
-});
-
-d3.csv("2017 Contributions By Zip (clean).csv", function(error, data) {
-  if (error) throw error;
-
-  contribData = data;
-  contribDataClone = JSON.parse(JSON.stringify(contribData));
-});
-
-</script>
-<!-- <!DOCTYPE html>
 <html>
-<head>
-<title>Los Angeles Neighborhoods Map</title>
-<meta charset="utf-8">
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
-<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
-<link rel="stylesheet" href="style.css" />
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      .control-group {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 10px;
+      }
 
-<body>
-<div id="map"></div>
-</body>
+      path {
+        fill: #ccc;
+        stroke: grey;
+        stroke-linejoin: round;
+      }
 
-<script>
-var width = 960,
-    height = 500,
-    active = d3.select(null);
+      .tooltip {
+        position: absolute;
+        width: auto;
+        height: auto;
+        padding: 4px;
+        padding-top: 8px;
+        font: 12px sans-serif;
+        color: white;
+        /* text-align: center; */
+        background: #fe8300;
+        border: 0;
+        border-radius: 10px;
+        opacity: 0;
+      }
+    </style>
+  </head>
 
-// Set map wrapper size.
-d3.select('#map')
-  .style('width', width + 'px')
-  .style('height', height + 'px');
+  <body>
+    <b>Filter(s):</b>
+    <div class="control-group">
+      <div class="select">
+        <label for="selCand">Candidate:</label>
+        <select class="bk bk-input" name="selCand" id="selCand" onchange="candOptionChanged(this.value)" autocomplete="off">
+          <option class="bk" selected="true" value="All">All</option>
+          <option class="bk" value="Aldana, Manuel">Aldana, Manuel</option>
+          <option class="bk" value="Alva, Lisa">Alva, Lisa</option>
+          <option class="bk" value="Amori, Paul">Amori, Paul</option>
+          <option class="bk" value="Arnold, Caney">Arnold, Caney</option>
+          <option class="bk" value="Ayala, Olga">Ayala, Olga</option>
+          <option class="bk" value="BARR, STEVE">BARR, STEVE</option>
+          <option class="bk" value="Barton, Luca ">Barton, Luca </option>
+          <option class="bk" value="Bernal, Benny ">Bernal, Benny </option>
+          <option class="bk" value="Blumenfield, Bob">Blumenfield, Bob</option>
+          <option class="bk" value="Bonin, Mike">Bonin, Mike</option>
+          <option class="bk" value="Bray-Ali, Josef A.">Bray-Ali, Josef A.</option>
+          <option class="bk" value="Buscaino, Joe">Buscaino, Joe</option>
+          <option class="bk" value="CHASE, NICOLE">CHASE, NICOLE</option>
+          <option class="bk" value="Cabrera, Adriana">Cabrera, Adriana</option>
+          <option class="bk" value="Cedillo, Gil">Cedillo, Gil</option>
+          <option class="bk" value="Creed, Jesse M.">Creed, Jesse M.</option>
+          <option class="bk" value="De la Torre, David">De la Torre, David</option>
+          <option class="bk" value="Feuer, Mike">Feuer, Mike</option>
+          <option class="bk" value="Flores, Fred ">Flores, Fred </option>
+          <option class="bk" value="GALPERIN, RON">GALPERIN, RON</option>
+          <option class="bk" value="Garcetti, Eric">Garcetti, Eric</option>
+          <option class="bk" value="Garcia, Monica">Garcia, Monica</option>
+          <option class="bk" value="Giaba, Matthew">Giaba, Matthew</option>
+          <option class="bk" value="Gibson, Robert">Gibson, Robert</option>
+          <option class="bk" value="Gomes, Terrence">Gomes, Terrence</option>
+          <option class="bk" value="Gonez, Kelly">Gonez, Kelly</option>
+          <option class="bk" value="Gould, Noel">Gould, Noel</option>
+          <option class="bk" value="Hernandez, David">Hernandez, David</option>
+          <option class="bk" value="Hernandez, Giovany">Hernandez, Giovany</option>
+          <option class="bk" value="Higginson , John ">Higginson , John
+          </option>
+          <option class="bk" value="Holdorff Polhill, Allison">Holdorff Polhill, Allison</option>
+          <option class="bk" value="Koretz, Paul">Koretz, Paul</option>
+          <option class="bk" value="Kremer, Yuval">Kremer, Yuval</option>
+          <option class="bk" value="Markland, Montgomery ">Markland, Montgomery
+          </option>
+          <option class="bk" value="Martayan, Gregory ">Martayan, Gregory
+          </option>
+          <option class="bk" value="Martinez, Venessa">Martinez, Venessa</option>
+          <option class="bk" value="Melvoin, Nicholas">Melvoin, Nicholas</option>
+          <option class="bk" value="Miner, Arthur">Miner, Arthur</option>
+          <option class="bk" value="Nuno , Jorge ">Nuno , Jorge </option>
+          <option class="bk" value="O'Farrell, Mitch">O'Farrell, Mitch</option>
+          <option class="bk" value="PARSEGHIAN, ARAZ">PARSEGHIAN, ARAZ</option>
+          <option class="bk" value="Padilla, Imelda">Padilla, Imelda</option>
+          <option class="bk" value="Petersen, Carl">Petersen, Carl</option>
+          <option class="bk" value="Preven, Eric">Preven, Eric</option>
+          <option class="bk" value="Price, Curren">Price, Curren</option>
+          <option class="bk" value="RATLIFF, MONICA">RATLIFF, MONICA</option>
+          <option class="bk" value="RYAVEC, MARK">RYAVEC, MARK</option>
+          <option class="bk" value="Rodriguez, Monica">Rodriguez, Monica</option>
+          <option class="bk" value="Rudisill, Robin ">Rudisill, Robin </option>
+          <option class="bk" value="Salans, Jessica">Salans, Jessica</option>
+          <option class="bk" value="Saunders, Constance">Saunders, Constance</option>
+          <option class="bk" value="Schwartz, Mitchell">Schwartz, Mitchell</option>
+          <option class="bk" value="Shain, Sylvie">Shain, Sylvie</option>
+          <option class="bk" value="Sharp, Jeffery">Sharp, Jeffery</option>
+          <option class="bk" value="Torossian, Karo">Torossian, Karo</option>
+          <option class="bk" value="Woodruff, Nancy">Woodruff, Nancy</option>
+          <option class="bk" value="ZIMMER, STEVE">ZIMMER, STEVE</option>
+          <option class="bk" value="Zide, Bill">Zide, Bill</option>
+        </select>
+      </div>
+      <div class="select">
+        <label for="selPeriod">Filing Period:</label>
+        <select class="bk bk-input" name="selPeriod" id="selPeriod" onchange="fileOptionChanged(this.value)"
+          autocomplete="off">
+          <option class="bk" selected="true" value="All">All</option>
+          <option class="bk" value="1st Semi-Annual (2015-01-01 to 2015-06-30)">1st Semi-Annual (2015-01-01 to 2015-06-30)
+          </option>
+          <option class="bk" value="2nd Semi-Annual (2015-07-01 to 2015-12-31)">2nd Semi-Annual (2015-07-01 to 2015-12-31)
+          </option>
+          <option class="bk" value="1st Semi-Annual (2016-01-01 to 2016-06-30)">1st Semi-Annual (2016-01-01 to 2016-06-30)
+          </option>
+          <option class="bk" value="3rd Quarterly (2016-07-01 to 2016-09-30)">3rd Quarterly (2016-07-01 to 2016-09-30)
+          </option>
+          <option class="bk" value="4th Quarterly (2016-10-01 to 2016-12-31)">4th Quarterly (2016-10-01 to 2016-12-31)
+          </option>
+          <option class="bk" value="1st Pre-Election (2017-01-01 to 2017-01-21)">1st Pre-Election (2017-01-01 to 2017-01-21)
+          </option>
+          <option class="bk" value="2nd Pre-Election (2017-01-22 to 2017-02-18)">2nd Pre-Election (2017-01-22 to 2017-02-18)
+          </option>
+          <option class="bk" value="3rd Pre-Election (2017-02-19 to 2017-03-01)">3rd Pre-Election (2017-02-19 to 2017-03-01)
+          </option>
+          <option class="bk" value="1st Semi-Annual (2017-01-01 to 2017-06-30)">1st Semi-Annual (2017-01-01 to 2017-06-30)
+          </option>
+          <option class="bk" value="2nd Semi-Annual (2017-07-01 to 2017-12-31)">2nd Semi-Annual (2017-07-01 to 2017-12-31)
+          </option>
+          <option class="bk" value="1st Pre-Runoff (2017-03-02 to 2017-04-01)">1st Pre-Runoff (2017-03-02 to 2017-04-01)
+          </option>
+          <option class="bk" value="2nd Pre-Runoff (2017-04-02 to 2017-04-29)">2nd Pre-Runoff (2017-04-02 to 2017-04-29)
+          </option>
+          <option class="bk" value="3rd Pre-Runoff (2017-04-30 to 2017-05-10)">3rd Pre-Runoff (2017-04-30 to 2017-05-10)
+          </option>
+          <option class="bk" value="1st Semi-Annual (2018-01-01 to 2018-06-30)">1st Semi-Annual (2018-01-01 to 2018-06-30)
+          </option>
+          <option class="bk" value="2nd Semi-Annual (2018-07-01 to 2018-12-31)">2nd Semi-Annual (2018-07-01 to 2018-12-31)
+          </option>
+        </select>
+      </div>
+      <div class="select">
+        <label for="selOffice">Office Seat:</label>
+        <select class="bk bk-input" name="selOffice" id="selOffice" onchange="officeOptionChanged(this.value)"
+          autocomplete="off">
+          <option class="bk" selected="true" value="All">All</option>
+          <option class="bk" value="LAUSD Board Member">LAUSD Board Member</option>
+          <option class="bk" value="City Attorney">City Attorney</option>
+          <option class="bk" value="City Council Member">City Council Member</option>
+          <option class="bk" value="City Controller">City Controller</option>
+          <option class="bk" value="Mayor">Mayor</option>
+        </select>
+      </div>
+    </div>
 
-// Create Leftlet map and center in the desired position.
-var map = L.map('map').setView([34.0000, -118.300], 10);
+    <svg width="960" height="960"></svg>
+    <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
 
-// Mapbox
-var tiles = 'https://{s}.tiles.mapbox.com/v3/examples.map-i87786ca/{z}/{x}/{y}.png';
-// Openstreetmap
-//var tiles = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    <script>
+      var mapsvg = d3.select("svg").on("click", stopped, true);
+      var width = 960;
+      var height = 960;
+      var geoData;
+      var contribData;
+      var contribDataClone;
 
-// Add openstreetmap tile layer.
-L.tileLayer(tiles, { maxZoom: 18 }).addTo(map);
+      var domain = [1000, 2500, 5000, 10000, 50000, 100000, 500000];
+      var ramp = d3
+        .scaleThreshold()
+        .domain(domain)
+        .range(d3.schemeBlues[8]);
 
-/* Initialize the SVG layer */
-map._initPathRoot();
+      function getToolTip(mod = false) {
+        var toolTip = d3
+          .tip()
+          .attr("class", "tooltip")
+          .offset([80, -60]);
 
-// Create the svg element inside the div.
-//var svg = d3.select("#map").select("svg");
-var svg = d3.select(map.getPanes().overlayPane).append("svg");
-var g = svg.append("g").attr("class", "leaflet-zoom-hide");
+        if (mod) {
+          return toolTip.html(function(d) {
+            // if(d.properties.hasOwnProperty('sum2')) {
+            return `Zip Code: ${
+              d.properties.zipcode
+            }<br>Sum: ${d3.format("($,")(d.properties.sum2.toFixed(0))}<br>Count: ${d.properties.count2}<br>Mean: ${d3.format("($,")(d.properties.mean2.toFixed(0))}`;
+            // }
+          });
+        }
+        return toolTip.html(function(d) {
+          return `Zip Code: ${
+            d.properties.zipcode
+          }<br>Sum: ${d3.format("($,")(d.properties.sum.toFixed(0))}<br>Count: ${d.properties.count}<br>Mean: ${d3.format("($,")(d.properties.mean.toFixed(0))}`;
+        });
+      }
 
-// Initialize tooltips.
-var tip = d3.tip()
-  .attr('class', 'd3-tip')
-  .offset([-10, 0])
-  .html(function(d) { return d.properties.name; });
-svg.call(tip);
+      var zoom = d3
+        .zoom()
+        // .translate([width / 2, height / 2])
+        // .scale(scale0)
+        // .scaleExtent([scale0, 10 * scale0])
+        .scaleExtent([1, 8])
+        .on("zoom", zoomed);
 
-// Use Leaflet to implement a D3 geometric transformation.
-function projectPoint(x, y) {
-  var point = map.latLngToLayerPoint(new L.LatLng(y, x));
-  this.stream.point(point.x, point.y);
-}
+      function zoomed() {
+        var currentTransform = d3.event.transform;
+        mapsvg.style("stroke-width", 1.5 / currentTransform.k + "px");
+        mapsvg.attr("transform", currentTransform);
+      }
 
-// Create a d3.geo.path to convert GeoJSON to SVG.
-var transform = d3.geo.transform({point: projectPoint});
-var path = d3.geo.path()
-  .projection(transform);
+      function stopped() {
+        if (d3.event.defaultPrevented) d3.event.stopPropagation();
+      }
 
-// Random color function.
-var color = function(d) {
-  return 'blue';
-};
+      function drawMap(w, h) {}
 
-var geojson_file = "https://gist.githubusercontent.com/jvillama/4e1d57a5354e6aaad5ab8d6eaf925341/raw/7753369b7a61a8b97561428891d4ea8b71c59150/Data%2520Angels%25202017%2520Contributions%2520by%2520Zip.geojson";
+      let filterOptions = {
+        cand: "All",
+        period: "All",
+        office: "All"
+      };
 
-// Load json and display.
-d3.json(geojson_file, function(data) {
-  // Create a topojson feature using the geojson.
-  var neigh = topojson.feature(data, data.objects.la_county_neighborhoods_current);
+      function changeData() {
+        if (
+          filterOptions.cand === "All" &&
+          filterOptions.period === "All" &&
+          filterOptions.office === "All"
+        ) {
+          render(contribData);
+        } else {
+          contribDataClone = JSON.parse(JSON.stringify(contribData));
 
-  var cname = 'neigh';
-  var neigh_path = g.selectAll('.' + cname)
-    .data(neigh.features)
-    .enter()
-     .append('path')
-     .attr('d', path)
-     .classed(cname, true)
-     .style('fill', color)
-     .style('fill-opacity', 0.1)
-     .style('stroke', 1)
-     .style('stroke-opacity', 0.3)
-     .attr('name', function(d) { return d.properties.name; })
-     .on('mouseover', function() {
-         if (active.node() === this) return;
+          if (filterOptions.cand != "All") {
+            contribDataClone = contribDataClone.filter(
+              row => row.OC_NM_LST === filterOptions.cand
+            );
+          }
+          if (filterOptions.period != "All") {
+            contribDataClone = contribDataClone.filter(
+              row => row.filing_period === filterOptions.period
+            );
+          }
+          if (filterOptions.office != "All") {
+            contribDataClone = contribDataClone.filter(
+              row => row.OFC_DESC === filterOptions.office
+            );
+          }
+          render(contribDataClone);
+        }
+      }
 
-         tip.show(this.__data__);
-         d3.select(this)
-           .style('stroke', 1)
-           .style('fill', 'orange')
-           .style('fill-opacity', 0.7)
-           .style('stroke-opacity', 1);
-     })
-     .on('mouseout', function() {
-         if (active.node() === this) return;
+      function candOptionChanged(cand) {
+        let last = cand.split(",")[0];
 
-         tip.hide(this.__data__);
-         d3.select(this)
-           .transition().duration(250)
-           .style('stroke', 1)
-           .style('fill', color)
-           .style('fill-opacity', 0.1)
-           .style('stroke-opacity', 0.3);
-     })
-     .on("click", clicked);
+        if (filterOptions.cand != last) {
+          filterOptions.cand = last;
+          changeData();
+        }
+      }
 
-  // Set the map reset event.
-  map.on("viewreset", reset);
+      function fileOptionChanged(period) {
+        if (filterOptions.period != period) {
+          filterOptions.period = period;
+          changeData();
+        }
+      }
 
-  // Initialize.
-  reset();
+      function officeOptionChanged(office) {
+        if (filterOptions.office != office) {
+          filterOptions.office = office;
+          changeData();
+        }
+      }
 
-  // When the map reset event is called, recalculate the paths and svg size and position.
-  function reset() {
-    var bounds = path.bounds(neigh),
-        topLeft = bounds[0],
-        bottomRight = bounds[1];
+      function render(data) {
+        // Deep clone geojson data
+        let geoclone = JSON.parse(JSON.stringify(geoData));
 
-    svg.attr("width", bottomRight[0] - topLeft[0])
-      .attr("height", bottomRight[1] - topLeft[1])
-      .style("left", topLeft[0] + "px")
-      .style("top", topLeft[1] + "px");
+        var result = [];
+        data.reduce(function(res, value) {
+          if (!res[value.RPT_ZIP_CD]) {
+            res[value.RPT_ZIP_CD] = {
+              RPT_ZIP_CD: value.RPT_ZIP_CD,
+              sum: 0,
+              count: 0,
+              mean: 0
+            };
+            result.push(res[value.RPT_ZIP_CD]);
+          }
+          res[value.RPT_ZIP_CD].sum += Number(value.TOT_CON_AMT);
+          res[value.RPT_ZIP_CD].count += 1;
+          res[value.RPT_ZIP_CD].mean =
+            res[value.RPT_ZIP_CD].sum / res[value.RPT_ZIP_CD].count;
+          return res;
+        }, {});
 
-    g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+        // Loop through each data value in the .csv file
+        for (var i = 0; i < result.length; i++) {
+          // Grab Zip Code
+          var dataZip = result[i].RPT_ZIP_CD;
 
-    neigh_path.attr('d', path);
-  }
+          // Grab total sum value
+          var dataValue = result[i];
 
-  function clicked(d) {
-    if (active.node() === this) return zoom_reset();
-    active.classed("active", false)
-        .style('fill', 'blue')
-        .style('fill-opacity', 0.1)
-        .style('stroke-opacity', 0.3);
+          // Find the corresponding state inside the GeoJSON
+          for (var j = 0; j < geoclone.features.length; j++) {
+            var jsonZip = geoclone.features[j].properties.zipcode;
 
-    active = d3.select(this)
-        .classed("active", true)
-        .style('fill', 'red')
-        .style('fill-opacity', 0.7);
+            if (dataZip == jsonZip) {
+              // Copy the data value into the JSON
+              geoclone.features[j].properties.sum2 = dataValue.sum;
+              geoclone.features[j].properties.count2 = dataValue.count;
+              geoclone.features[j].properties.mean2 = dataValue.mean;
 
-    var nbounds = d3.geo.bounds(d);
+              // Stop looking through the JSON
+              break;
+            }
+          }
+        }
 
-    var southWest = L.latLng(nbounds[0][1], nbounds[0][0]),
-        northEast = L.latLng(nbounds[1][1], nbounds[1][0]),
-        neigh_bounds = L.latLngBounds(southWest, northEast);
+        let toolTip = getToolTip(true);
 
-    map.fitBounds(neigh_bounds);
-  }
+        mapsvg
+          .selectAll("path")
+          .data(geoclone.features)
+          .style("fill", function(d) {
+            if (d.properties.hasOwnProperty("sum2")) {
+              // console.log(d.properties);
+              return ramp(d.properties.sum2);
+            }
+            return "#ccc";
+          })
+          .call(toolTip)
+          .on("mouseover", function(d) {
+            if (d.properties.hasOwnProperty("sum2") && d.properties.sum2) {
+              // toolTip.transition()
+              //   .duration(200)
+              //   .style("opacity", .9);
+              toolTip.show(d);
+            }
+          })
+          .on("mouseout", function(d, index) {
+            // toolTip.transition()
+            //   .duration(500)
+            //   .style("opacity", 0);
+            toolTip.hide(d);
+          });
+      }
 
-  function zoom_reset() {
-    active.classed("active", false)
-        .style('fill', color)
-        .style('fill-opacity', 0.1)
-        .style('stroke-opacity', 0.3);
+      d3.json("Data Angels 2017 Contributions by Zip.topojson", function(error, data) {
+        if (error) throw error;
 
-    active = d3.select(null);
+        geoData = topojson.feature(
+          data,
+          data.objects["Data Angels 2017 Contributions by Zip"]
+        );
+        var chosenProjection = d3
+          .geoAlbersUsa() //.geoMercator()
+          .scale(1)
+          // .translate([1300, 450])
+          // .translate([width / 2, height / 2])
+          // .translate([34.0000, -118.300])
+          .fitSize([width, height], geoData);
 
-    map.setView([34.0000, -118.300], 10);
-  }
-});
+        var path = d3.geoPath().projection(chosenProjection);
 
-</script>
+        let toolTip = getToolTip();
 
-</html> -->
+        // Legend
+        var g = mapsvg
+          .append("g")
+          .attr("class", "legendThreshold")
+          .attr("transform", "translate(5,30)");
+        g.append("text")
+          .attr("class", "caption")
+          .attr("x", 0)
+          .attr("y", -6)
+          .text("Contribution Amount ($)");
+        var legend = d3
+          .legendColor()
+          .labelFormat(d3.format(","))
+          .labels(d3.legendHelpers.thresholdLabels)
+          // .labels(function (d) { return labels[d.i]; })
+          .shapePadding(4)
+          // .useClass(true)
+          .scale(ramp);
+
+        mapsvg
+          .selectAll("path")
+          .data(geoData.features)
+          .enter()
+          .append("path")
+          .attr("d", path)
+          .style("fill", function(d) {
+            if (d.properties.hasOwnProperty("sum") && d.properties.sum != 0) {
+              return ramp(d.properties.sum);
+            }
+            return "#ccc";
+          })
+          .call(toolTip)
+          .on("mouseover", function(d) {
+            if (d.properties.hasOwnProperty("sum") && d.properties.sum) {
+              // console.log(toolTip);
+              // console.log(d3.select("#tooltip"));
+              // toolTip.transition()
+              //   .duration(200)
+              //   .style("opacity", .9);
+              toolTip.show(d);
+            }
+          })
+          .on("mouseout", function(d, index) {
+            // toolTip.transition()
+            //   .duration(500)
+            //   .style("opacity", 0);
+            toolTip.hide(d);
+          });
+
+        mapsvg.select(".legendThreshold").call(legend);
+      });
+
+      d3.csv("2017 Contributions By Zip (clean).csv", function(error, data) {
+        if (error) throw error;
+
+        contribData = data;
+        contribDataClone = JSON.parse(JSON.stringify(contribData));
+      });
+    </script>
+  </body>
+</html>
