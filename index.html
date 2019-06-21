@@ -15,19 +15,25 @@
         stroke-linejoin: round;
       }
 
+      .zip:hover {
+        stroke: black;
+        stroke-width: 4px;
+      }
+
       .tooltip {
         position: absolute;
-        width: auto;
+        min-width: 60px;
         height: auto;
         padding: 4px;
         padding-top: 8px;
         font: 12px sans-serif;
         color: white;
         /* text-align: center; */
-        background: #fe8300;
+        background: lightsalmon;
         border: 0;
         border-radius: 10px;
-        opacity: 0;
+        /* opacity: 0; */
+        pointer-events: none;
       }
     </style>
   </head>
@@ -327,7 +333,7 @@
           .data(geoclone.features)
           .style("fill", function(d) {
             if (d.properties.hasOwnProperty("sum2")) {
-              // console.log(d.properties);
+              d3.select(this).attr('class', 'zip');
               return ramp(d.properties.sum2);
             }
             return "#ccc";
@@ -335,17 +341,13 @@
           .call(toolTip)
           .on("mouseover", function(d) {
             if (d.properties.hasOwnProperty("sum2") && d.properties.sum2) {
-              // toolTip.transition()
-              //   .duration(200)
-              //   .style("opacity", .9);
+              d3.select(this).attr('class', 'zip');
               toolTip.show(d);
             }
           })
           .on("mouseout", function(d, index) {
-            // toolTip.transition()
-            //   .duration(500)
-            //   .style("opacity", 0);
-            toolTip.hide(d);
+            d3.select(this).attr('class', null);
+            toolTip.hide();
           });
       }
 
@@ -357,11 +359,8 @@
           data.objects["Data Angels 2017 Contributions by Zip"]
         );
         var chosenProjection = d3
-          .geoAlbersUsa() //.geoMercator()
+          .geoAlbersUsa()
           .scale(1)
-          // .translate([1300, 450])
-          // .translate([width / 2, height / 2])
-          // .translate([34.0000, -118.300])
           .fitSize([width, height], geoData);
 
         var path = d3.geoPath().projection(chosenProjection);
@@ -402,19 +401,13 @@
           .call(toolTip)
           .on("mouseover", function(d) {
             if (d.properties.hasOwnProperty("sum") && d.properties.sum) {
-              // console.log(toolTip);
-              // console.log(d3.select("#tooltip"));
-              // toolTip.transition()
-              //   .duration(200)
-              //   .style("opacity", .9);
+              d3.select(this).attr('class', 'zip');
               toolTip.show(d);
             }
           })
-          .on("mouseout", function(d, index) {
-            // toolTip.transition()
-            //   .duration(500)
-            //   .style("opacity", 0);
-            toolTip.hide(d);
+          .on("mouseout", function(d) {
+            d3.select(this).attr('class', null);
+            toolTip.hide();
           });
 
         mapsvg.select(".legendThreshold").call(legend);
