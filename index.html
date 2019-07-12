@@ -42,70 +42,137 @@
     <b>Filter(s):</b>
     <div class="control-group">
       <div class="select">
+        <label for="selElec">Election:</label>
+        <select class="bk bk-input" name="selElec" id="selElec" onchange="elecOptionChanged(this.value)" autocomplete="off">
+          <option class="bk" selected="true" value="All">All</option>
+          <option class="bk" value="2017 City and LAUSD Elections">2017 City and LAUSD Elections</option>
+          <option class="bk" value="2019 LAUSD District 5 Special Election">2019 LAUSD District 5 Special Election</option>
+          <option class="bk" value="2019 CD 12 Special Election">2019 CD 12 Special Election</option>
+          <option class="bk" value="2020 City and LAUSD Elections">2020 City and LAUSD Elections</option>
+        </select>
+      </div>
+      <div class="select">
+        <label for="selOffice">Office:</label>
+        <select class="bk bk-input" name="selOffice" id="selOffice" onchange="officeOptionChanged(this.value)"
+          autocomplete="off">
+          <option class="bk" selected="true" value="All">All</option>
+          <option class="bk" value="Mayor">Mayor</option>
+          <option class="bk" value="City Attorney">City Attorney</option>
+          <option class="bk" value="City Controller">City Controller</option>
+          <option class="bk" value="City Council Member - District 1">City Council Member - District 1</option>
+          <option class="bk" value="City Council Member - District 2">City Council Member - District 2</option>
+          <option class="bk" value="City Council Member - District 3">City Council Member - District 3</option>
+          <option class="bk" value="City Council Member - District 4">City Council Member - District 4</option>
+          <option class="bk" value="City Council Member - District 5">City Council Member - District 5</option>
+          <option class="bk" value="City Council Member - District 7">City Council Member - District 7</option>
+          <option class="bk" value="City Council Member - District 8">City Council Member - District 8</option>
+          <option class="bk" value="City Council Member - District 9">City Council Member - District 9</option>
+          <option class="bk" value="City Council Member - District 10">City Council Member - District 10</option>
+          <option class="bk" value="City Council Member - District 11">City Council Member - District 11</option>
+          <option class="bk" value="City Council Member - District 12">City Council Member - District 12</option>
+          <option class="bk" value="City Council Member - District 13">City Council Member - District 13</option>
+          <option class="bk" value="City Council Member - District 14">City Council Member - District 14</option>
+          <option class="bk" value="City Council Member - District 15">City Council Member - District 15</option>
+          <option class="bk" value="LAUSD Board Member - District 2">LAUSD Board Member - District 2</option>
+          <option class="bk" value="LAUSD Board Member - District 4">LAUSD Board Member - District 4</option>
+          <option class="bk" value="LAUSD Board Member - District 5">LAUSD Board Member - District 5</option>
+          <option class="bk" value="LAUSD Board Member - District 6">LAUSD Board Member - District 6</option>
+        </select>
+      </div>
+      <div class="select">
         <label for="selCand">Candidate:</label>
         <select class="bk bk-input" name="selCand" id="selCand" onchange="candOptionChanged(this.value)" autocomplete="off">
           <option class="bk" selected="true" value="All">All</option>
+          <option class="bk" value="Abrams, Scott">Abrams, Scott</option>
           <option class="bk" value="Aldana, Manuel">Aldana, Manuel</option>
           <option class="bk" value="Alva, Lisa">Alva, Lisa</option>
+          <option class="bk" value="Amador, Carlos">Amador, Carlos</option>
           <option class="bk" value="Amori, Paul">Amori, Paul</option>
           <option class="bk" value="Arnold, Caney">Arnold, Caney</option>
           <option class="bk" value="Ayala, Olga">Ayala, Olga</option>
-          <option class="bk" value="BARR, STEVE">BARR, STEVE</option>
+          <option class="bk" value="Bajracharya, Allison">Bajracharya, Allison</option>
+          <option class="bk" value="Barr, Steve ">Barr, Steve </option>
           <option class="bk" value="Barton, Luca ">Barton, Luca </option>
+          <option class="bk" value="Beeber, Jay ">Beeber, Jay </option>
           <option class="bk" value="Bernal, Benny ">Bernal, Benny </option>
           <option class="bk" value="Blumenfield, Bob">Blumenfield, Bob</option>
           <option class="bk" value="Bonin, Mike">Bonin, Mike</option>
-          <option class="bk" value="Bray-Ali, Josef A.">Bray-Ali, Josef A.</option>
+          <option class="bk" value="Bray-Ali, Josef">Bray-Ali, Josef</option>
           <option class="bk" value="Buscaino, Joe">Buscaino, Joe</option>
-          <option class="bk" value="CHASE, NICOLE">CHASE, NICOLE</option>
           <option class="bk" value="Cabrera, Adriana">Cabrera, Adriana</option>
-          <option class="bk" value="Cedillo, Gil">Cedillo, Gil</option>
-          <option class="bk" value="Creed, Jesse M.">Creed, Jesse M.</option>
+          <option class="bk" value="Cedillo, Gilbert">Cedillo, Gilbert</option>
+          <option class="bk" value="Chase, Nicole">Chase, Nicole</option>
+          <option class="bk" value="Cho, Annie">Cho, Annie</option>
+          <option class="bk" value="Cisneros , Eduardo">Cisneros , Eduardo</option>
+          <option class="bk" value="Creed, Jesse">Creed, Jesse</option>
+          <option class="bk" value="Cubas, Ana">Cubas, Ana</option>
+          <option class="bk" value="Daar, Jeffery">Daar, Jeffery</option>
           <option class="bk" value="De la Torre, David">De la Torre, David</option>
-          <option class="bk" value="Feuer, Mike">Feuer, Mike</option>
+          <option class="bk" value="Dinse, Charles">Dinse, Charles</option>
+          <option class="bk" value="Ferry, Frank">Ferry, Frank</option>
+          <option class="bk" value="Feuer, Michael">Feuer, Michael</option>
           <option class="bk" value="Flores, Fred ">Flores, Fred </option>
-          <option class="bk" value="GALPERIN, RON">GALPERIN, RON</option>
+          <option class="bk" value="Galperin, Ron">Galperin, Ron</option>
           <option class="bk" value="Garcetti, Eric">Garcetti, Eric</option>
           <option class="bk" value="Garcia, Monica">Garcia, Monica</option>
           <option class="bk" value="Giaba, Matthew">Giaba, Matthew</option>
           <option class="bk" value="Gibson, Robert">Gibson, Robert</option>
+          <option class="bk" value="Goldberg, Jackie">Goldberg, Jackie</option>
           <option class="bk" value="Gomes, Terrence">Gomes, Terrence</option>
           <option class="bk" value="Gonez, Kelly">Gonez, Kelly</option>
+          <option class="bk" value="Gonzalez, Cynthia">Gonzalez, Cynthia</option>
+          <option class="bk" value="Gonzalez, Justine">Gonzalez, Justine</option>
           <option class="bk" value="Gould, Noel">Gould, Noel</option>
+          <option class="bk" value="Harris-Dawson, Marqueece">Harris-Dawson, Marqueece</option>
           <option class="bk" value="Hernandez, David">Hernandez, David</option>
           <option class="bk" value="Hernandez, Giovany">Hernandez, Giovany</option>
-          <option class="bk" value="Higginson , John ">Higginson , John
-          </option>
-          <option class="bk" value="Holdorff Polhill, Allison">Holdorff Polhill, Allison</option>
+          <option class="bk" value="Higginson , John ">Higginson , John </option>
+          <option class="bk" value="Huizar, Richelle">Huizar, Richelle</option>
+          <option class="bk" value="Kayajian, Jack ">Kayajian, Jack </option>
           <option class="bk" value="Koretz, Paul">Koretz, Paul</option>
+          <option class="bk" value="Krekorian, Paul">Krekorian, Paul</option>
           <option class="bk" value="Kremer, Yuval">Kremer, Yuval</option>
-          <option class="bk" value="Markland, Montgomery ">Markland, Montgomery
-          </option>
-          <option class="bk" value="Martayan, Gregory ">Martayan, Gregory
-          </option>
-          <option class="bk" value="Martinez, Venessa">Martinez, Venessa</option>
-          <option class="bk" value="Melvoin, Nicholas">Melvoin, Nicholas</option>
+          <option class="bk" value="Lee, John">Lee, John</option>
+          <option class="bk" value="Levy, Sarah">Levy, Sarah</option>
+          <option class="bk" value="Lundquist, Loraine">Lundquist, Loraine</option>
+          <option class="bk" value="Maloyan, Stella ">Maloyan, Stella </option>
+          <option class="bk" value="Markland, Montgomery ">Markland, Montgomery </option>
+          <option class="bk" value="Martayan, Gregory ">Martayan, Gregory </option>
+          <option class="bk" value="Martinez, Venessa ">Martinez, Venessa </option>
+          <option class="bk" value="Melvoin, Nicholas ">Melvoin, Nicholas </option>
           <option class="bk" value="Miner, Arthur">Miner, Arthur</option>
           <option class="bk" value="Nuno , Jorge ">Nuno , Jorge </option>
           <option class="bk" value="O'Farrell, Mitch">O'Farrell, Mitch</option>
-          <option class="bk" value="PARSEGHIAN, ARAZ">PARSEGHIAN, ARAZ</option>
+          <option class="bk" value="Ortiz, Graciela">Ortiz, Graciela</option>
           <option class="bk" value="Padilla, Imelda">Padilla, Imelda</option>
+          <option class="bk" value="Parseghian, Araz">Parseghian, Araz</option>
           <option class="bk" value="Petersen, Carl">Petersen, Carl</option>
+          <option class="bk" value="Polhill, Allison">Polhill, Allison</option>
           <option class="bk" value="Preven, Eric">Preven, Eric</option>
           <option class="bk" value="Price, Curren">Price, Curren</option>
-          <option class="bk" value="RATLIFF, MONICA">RATLIFF, MONICA</option>
-          <option class="bk" value="RYAVEC, MARK">RYAVEC, MARK</option>
+          <option class="bk" value="Ratliff, Monica">Ratliff, Monica</option>
+          <option class="bk" value="Repenning, Heather ">Repenning, Heather </option>
           <option class="bk" value="Rodriguez, Monica">Rodriguez, Monica</option>
           <option class="bk" value="Rudisill, Robin ">Rudisill, Robin </option>
+          <option class="bk" value="Ryavec, Mark">Ryavec, Mark</option>
+          <option class="bk" value="Ryu, David">Ryu, David</option>
+          <option class="bk" value="Saario, Brandon">Saario, Brandon</option>
           <option class="bk" value="Salans, Jessica">Salans, Jessica</option>
+          <option class="bk" value="Sanchez, Salvador &quot;Chamba&quot;">Sanchez, Salvador "Chamba"</option>
           <option class="bk" value="Saunders, Constance">Saunders, Constance</option>
           <option class="bk" value="Schwartz, Mitchell">Schwartz, Mitchell</option>
           <option class="bk" value="Shain, Sylvie">Shain, Sylvie</option>
           <option class="bk" value="Sharp, Jeffery">Sharp, Jeffery</option>
-          <option class="bk" value="Torossian, Karo">Torossian, Karo</option>
+          <option class="bk" value="Singh, Navraj ">Singh, Navraj </option>
+          <option class="bk" value="Torossian , Karo">Torossian , Karo</option>
+          <option class="bk" value="Valdez, David">Valdez, David</option>
+          <option class="bk" value="Valencia, Nestor">Valencia, Nestor</option>
           <option class="bk" value="Woodruff, Nancy">Woodruff, Nancy</option>
-          <option class="bk" value="ZIMMER, STEVE">ZIMMER, STEVE</option>
+          <option class="bk" value="Yeager, Joshua">Yeager, Joshua</option>
+          <option class="bk" value="Yoo, Grace">Yoo, Grace</option>
+          <option class="bk" value="Zeise-Oberstein, Serena">Zeise-Oberstein, Serena</option>
           <option class="bk" value="Zide, Bill">Zide, Bill</option>
+          <option class="bk" value="Zimmer, Steve">Zimmer, Steve</option>
         </select>
       </div>
       <div class="select">
@@ -119,10 +186,8 @@
           </option>
           <option class="bk" value="1st Semi-Annual (2016-01-01 to 2016-06-30)">1st Semi-Annual (2016-01-01 to 2016-06-30)
           </option>
-          <option class="bk" value="3rd Quarterly (2016-07-01 to 2016-09-30)">3rd Quarterly (2016-07-01 to 2016-09-30)
-          </option>
-          <option class="bk" value="4th Quarterly (2016-10-01 to 2016-12-31)">4th Quarterly (2016-10-01 to 2016-12-31)
-          </option>
+          <option class="bk" value="3rd Quarterly (2016-07-01 to 2016-09-30)">3rd Quarterly (2016-07-01 to 2016-09-30)</option>
+          <option class="bk" value="4th Quarterly (2016-10-01 to 2016-12-31)">4th Quarterly (2016-10-01 to 2016-12-31)</option>
           <option class="bk" value="1st Pre-Election (2017-01-01 to 2017-01-21)">1st Pre-Election (2017-01-01 to 2017-01-21)
           </option>
           <option class="bk" value="2nd Pre-Election (2017-01-22 to 2017-02-18)">2nd Pre-Election (2017-01-22 to 2017-02-18)
@@ -143,21 +208,30 @@
           </option>
           <option class="bk" value="2nd Semi-Annual (2018-07-01 to 2018-12-31)">2nd Semi-Annual (2018-07-01 to 2018-12-31)
           </option>
+          <option class="bk" value="4th Quarterly (2018-10-01 to 2018-12-31)">4th Quarterly (2018-10-01 to 2018-12-31)</option>
+          <option class="bk" value="4th Quarterly (2018-12-24 to 2018-12-31)">4th Quarterly (2018-12-24 to 2018-12-31)</option>
+          <option class="bk" value="1st Pre-Election (2019-01-01 to 2019-01-19)">1st Pre-Election (2019-01-01 to 2019-01-19)
+          </option>
+          <option class="bk" value="2nd Pre-Election (2019-01-20 to 2019-02-16)">2nd Pre-Election (2019-01-20 to 2019-02-16)
+          </option>
+          <option class="bk" value="3rd Pre-Election (2019-02-17 to 2019-02-27)">3rd Pre-Election (2019-02-17 to 2019-02-27)
+          </option>
+          <option class="bk" value="1st Pre-Runoff (2019-02-28 to 2019-03-30)">1st Pre-Runoff (2019-02-28 to 2019-03-30)
+          </option>
+          <option class="bk" value="2nd Pre-Runoff (2019-03-31 to 2019-04-27)">2nd Pre-Runoff (2019-03-31 to 2019-04-27)
+          </option>
+          <option class="bk" value="3rd Pre-Runoff (2019-04-28 to 2019-05-08)">3rd Pre-Runoff (2019-04-28 to 2019-05-08)
+          <option class="bk" value="1st Pre-Election (2019-04-01 to 2019-04-20)">1st Pre-Election (2019-04-01 to 2019-04-20)
+          </option>
+          <option class="bk" value="2nd Pre-Election (2019-04-21 to 2019-05-18)">2nd Pre-Election (2019-04-21 to 2019-05-18)
+          </option>
+          <option class="bk" value="3rd Pre-Election (2019-05-19 to 2019-05-29)">3rd Pre-Election (2019-05-19 to 2019-05-29)
+          </option>
+          <option class="bk" value="1st Quarterly (2019-01-01 to 2019-03-31)">1st Quarterly (2019-01-01 to 2019-03-31)</option>
+          </option>
         </select>
       </div>
-      <div class="select">
-        <label for="selOffice">Office Seat:</label>
-        <select class="bk bk-input" name="selOffice" id="selOffice" onchange="officeOptionChanged(this.value)"
-          autocomplete="off">
-          <option class="bk" selected="true" value="All">All</option>
-          <option class="bk" value="LAUSD Board Member">LAUSD Board Member</option>
-          <option class="bk" value="City Attorney">City Attorney</option>
-          <option class="bk" value="City Council Member">City Council Member</option>
-          <option class="bk" value="City Controller">City Controller</option>
-          <option class="bk" value="Mayor">Mayor</option>
-        </select>
       </div>
-    </div>
 
     <svg width="960" height="960"></svg>
     <script src="https://d3js.org/d3.v4.min.js" charset="utf-8"></script>
