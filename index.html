@@ -39,6 +39,7 @@
   </head>
 
   <body>
+    <h1>Historical Los Angeles Campaign Contributions by Zip Code</h1>
     <b>Filter(s):</b>
     <div class="control-group">
       <div class="select">
@@ -258,7 +259,12 @@
         var toolTip = d3
           .tip()
           .attr("class", "tooltip")
-          .offset([80, -60]);
+          .offset([10, 10])
+          // .offset(function() {
+          //   console.log(this);
+          //   console.log(Object.getOwnPropertyNames(this));
+          //   return [this.getBBox().height + 60, this.getBBox().width + 60];
+          // });
 
         if (mod) {
           return toolTip.html(function(d) {
